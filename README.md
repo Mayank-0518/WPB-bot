@@ -23,28 +23,7 @@ A sophisticated AI-powered personal assistant that combines WhatsApp integration
 - **Scheduling**: APScheduler for reminders
 - **Document Processing**: PyMuPDF, python-docx
 
-## 📁 Project Structure
 
-```
-WP brain/
-├── backend/                    # Main application code
-│   ├── ai/                    # AI components (Granite API, Q&A, Summarization)
-│   ├── files/                 # File parsing and processing
-│   ├── memory/                # Vector store and embeddings
-│   ├── models/                # Data schemas and models
-│   ├── routes/                # API endpoints (WhatsApp, reminders)
-│   ├── scheduler/             # Task scheduling and reminders
-│   └── utils/                 # Configuration and utilities
-├── test/                      # Unit and integration tests
-├── local tests/               # Development and debugging scripts (gitignored)
-├── example_docs/              # Sample documents for testing
-├── uploads/                   # User uploaded files (gitignored)
-├── vectorstore/               # FAISS vector database (gitignored)
-├── .env                       # Environment variables (gitignored)
-├── .gitignore                 # Git ignore rules
-├── requirements.txt           # Python dependencies
-└── README.md                  # This file
-```
 
 ## 📋 Prerequisites
 
@@ -59,9 +38,7 @@ WP brain/
    - Set up WhatsApp Sandbox
    - Get Account SID, Auth Token, and Phone Number
 
-3. **MongoDB**:
-   - Set up MongoDB Atlas (cloud) or local MongoDB
-   - Get connection URI
+
 
 ## ⚙️ Setup Instructions
 
@@ -117,15 +94,9 @@ TWILIO_AUTH_TOKEN=your_auth_token
 TWILIO_PHONE_NUMBER=whatsapp:+1415xxxxxxx
 ```
 
-### 5. MongoDB Setup
 
-```bash
-# MongoDB
-MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/
-MONGO_DB_NAME=secondbrain
-```
 
-### 6. Run the Application
+### 5. Run the Application
 
 ```bash
 # Start the FastAPI server
@@ -215,32 +186,7 @@ python -m pytest test/ -v
 python test/test_ai.py
 ```
 
-### Development & Debug Scripts
-Located in `local tests/` directory - these are gitignored and not included in the repository:
 
-- `debug_qa.py` - Debug Q&A system and vector search
-- `test_api.py` - Test API endpoints directly
-- `test_whatsapp.py` - Test WhatsApp integration
-- `test_pdf_parsing.py` - Debug PDF parsing issues
-- `test_reminder_delivery.py` - Test reminder scheduling
-- `cleanup_errors.py` - Clean up corrupted documents from vector store
-- `add_india_pdf.py` - Add test content to vector store
-- `create_real_pdf.py` - Generate test PDF files
-
-### Running Development Tests
-
-```bash
-# Example: Debug the Q&A system
-python "local tests/debug_qa.py"
-
-# Example: Test PDF parsing
-python "local tests/test_pdf_parsing.py"
-
-# Example: Clean up error documents
-python "local tests/cleanup_errors.py"
-```
-
-**Note**: Development test scripts contain hardcoded user IDs and test data for debugging specific issues. They should not be included in production deployments.
 
 ### Test WhatsApp Integration
 
@@ -322,116 +268,13 @@ The system uses IBM Granite-3-3-8b-instruct with optimized parameters:
    - Ensure supported file format
    - Verify upload directory permissions
 
-### Debug Mode
 
-Enable detailed logging:
 
-```bash
-DEBUG=True
-```
 
-Check logs for detailed error information and API request/response details.
 
-## 📈 Performance & Scaling
 
-### Optimization Tips
 
-1. **Vector Store**: FAISS indexes are stored locally and loaded in memory
-2. **Token Caching**: IAM tokens are cached for ~1 hour
-3. **Database**: Use MongoDB indexes for faster queries
-4. **File Storage**: Consider cloud storage for production
 
-### Production Deployment
 
-1. **Environment**:
-   - Use production MongoDB cluster
-   - Set up proper logging and monitoring
-   - Configure HTTPS with valid certificates
 
-2. **Security**:
-   - Rotate API keys regularly
-   - Use environment-specific credentials
-   - Implement rate limiting
 
-3. **Scaling**:
-   - Use multiple worker processes
-   - Consider Redis for session storage
-   - Implement load balancing
-
-## 🔧 Development Setup
-
-### Local Development
-
-1. **Clone and Install**:
-```bash
-git clone <repository-url>
-cd "WP brain"
-pip install -r requirements.txt
-```
-
-2. **Environment Setup**:
-```bash
-cp .env.example .env
-# Edit .env with your credentials
-```
-
-3. **Create Local Tests Directory** (optional):
-```bash
-mkdir "local tests"
-# Add your development and debugging scripts here
-# These will be automatically gitignored
-```
-
-4. **Run Development Server**:
-```bash
-python -m backend.main
-# Server runs on http://localhost:8000
-```
-
-### Git Workflow
-
-The `.gitignore` file excludes:
-- ✅ Environment files (`.env`)
-- ✅ Python cache files (`__pycache__/`)
-- ✅ Local test scripts (`local tests/`)
-- ✅ Uploaded files (`uploads/`)
-- ✅ Vector database (`vectorstore/`)
-- ✅ IDE files (`.vscode/`, `.idea/`)
-- ✅ Temporary files and logs
-
-### Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Add tests for new functionality in `test/` directory
-5. Ensure all tests pass: `python -m pytest test/ -v`
-6. Commit your changes: `git commit -m 'Add amazing feature'`
-7. Push to the branch: `git push origin feature/amazing-feature`
-8. Open a Pull Request
-
-**Development Guidelines**:
-- Keep production tests in `test/` directory
-- Put debugging scripts in `local tests/` (gitignored)
-- Follow existing code style and patterns
-- Add docstrings for new functions and classes
-- Update README for significant changes
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- IBM watsonx.ai for Granite model access
-- Twilio for WhatsApp API
-- OpenAI for inspiration
-- FastAPI and FAISS communities
-
----
-
-**Need Help?** 
-
-- Check the [API Documentation](http://localhost:8000/docs) when running
-- Review test files in `test/` directory for usage examples
-- Open an issue for bugs or feature requests
